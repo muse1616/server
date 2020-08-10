@@ -7,12 +7,13 @@ import (
 	"server/utils"
 )
 
+// 单例连接
+var conn, _ = GetRabbitMQConnection()
+
+/**
+代码发送到消息队列
+*/
 func SendCode(codeModel *model.CodeModel) (err error) {
-	//获取rabbitMQ
-	conn, err := GetRabbitMQConnection()
-	utils.FailOnError(err, "")
-	// 资源释放
-	defer conn.Close()
 	// 获取通道
 	ch, err := conn.Channel()
 	utils.FailOnError(err, "Failed to open a channel")

@@ -1,0 +1,19 @@
+# RabbitMQ 配置文件
+code:
+  url : "192.168.88.130"
+  id : "admin"
+  pwd : "admin"
+  vhost : "/code_submit"
+  port : "5672"
+
+# redis
+redis:
+  address : "49.232.14.16:6379"
+  password : "19991116hjj"
+
+# mysql
+mysql:
+  username : "root"
+  password : "19991116hjj"
+  address : "49.232.14.16:3306"
+  dbName : "codeplaygrounddev"
