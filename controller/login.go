@@ -117,3 +117,43 @@ func ConfirmLoginEmailVerification(ctx *gin.Context) {
 		})
 	}
 }
+
+/**
+使用密码登录
+*/
+func LoginWithPassword(ctx *gin.Context) {
+	var lwp model.LoginWithPassword
+	if err := ctx.Bind(&lwp); err != nil {
+		ctx.JSON(http.StatusForbidden, gin.H{
+			"error_code": 1,
+			"data":       "参数错误",
+		})
+	}
+	result := dao.UserLoginWithPassword(lwp.Email, lwp.Password)
+	if result == true {
+		sessionId := utils.GenerateUUid()
+		// 处理session_id
+		err := cache.SetSession(sessionId, lwp.Email)
+		if err != nil {
+			ctx.JSON(http.StatusForbidden, gin.H{
+				"error_code": 3,
+				"data":       "服务器错误",
+			})
+			log.Println(err)
+			return
+		}
+		// 将session_id保存在本地的cookie
+		ctx.SetCookie(utils.Md5secret("session_id"), sessionId, 3600*12, "/", "127.0.0.1", false, true)
+		// 将email加密放在本地cookie md5
+		ctx.SetCookie(utils.Md5secret("email"), utils.Md5secret(lwp.Email), 3600*24, "/", "127.0.0.1", false, true)
+		ctx.JSON(http.StatusOK, gin.H{
+			"error_code": 0,
+			"data":       "登录成功",
+		})
+	} else if result == false {
+		ctx.JSON(http.StatusForbidden, gin.H{
+			"error_code": 1,
+			"data":       "账号或密码错误",
+		})
+	}
+}

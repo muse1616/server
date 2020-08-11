@@ -29,7 +29,7 @@ func SetupRouter() *gin.Engine {
 		//  验证登录验证码
 		v1Group.POST("/user/login/confirm/verification", controller.ConfirmLoginEmailVerification)
 		//  邮箱密码登录
-		v1Group.POST("/user/login/password")
+		v1Group.POST("/user/login/password",controller.LoginWithPassword)
 
 	}
 

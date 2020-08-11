@@ -4,14 +4,16 @@ import "github.com/jinzhu/gorm"
 
 // 用户注册模型 账号、邮箱、密码
 type RegisterUserModel struct {
-	Email    string `json:"email"`
+	Email string `json:"email"`
 }
+
 // 验证码验证
 type VerificationConfirm struct {
-	Email string `json:"email"`
+	Email        string `json:"email"`
 	Verification string `json:"Verification"`
-	Password string `json:"password"`
+	Password     string `json:"password"`
 }
+
 // 发送邮箱 以请求验证码
 type EmailForVerification struct {
 	Email string `json:"email"`
@@ -19,8 +21,14 @@ type EmailForVerification struct {
 
 // 邮箱验证码登录
 type LoginWithEmailVerification struct {
-	Email string `json:"email"`
+	Email        string `json:"email"`
 	Verification string `json:"Verification"`
+}
+
+// 邮箱密码登录
+type LoginWithPassword struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
 }
 
 type AuthTest struct {
