@@ -17,7 +17,10 @@ type YamlConfig struct {
 }
 
 // 目录即配置文件后缀 静态变量
+// linux 绝对路径
+//const path = "/usr/local/code_playground/config/"
 const path = "config/"
+
 const suffix = ".yaml"
 
 // 接口实现

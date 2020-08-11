@@ -17,3 +17,4 @@ CREATE TABLE `user` (
 	UNIQUE (`email`),
 	KEY `idx_student_deleted_at` (`deleted_at`)
 ) ENGINE = INNODB DEFAULT CHARSET = utf8mb4;
+ALTER TABLE `user`ADD INDEX email_index(`email`)

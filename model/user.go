@@ -12,8 +12,20 @@ type VerificationConfirm struct {
 	Verification string `json:"Verification"`
 	Password string `json:"password"`
 }
+// 发送邮箱 以请求验证码
+type EmailForVerification struct {
+	Email string `json:"email"`
+}
 
+// 邮箱验证码登录
+type LoginWithEmailVerification struct {
+	Email string `json:"email"`
+	Verification string `json:"Verification"`
+}
 
+type AuthTest struct {
+	Email string `json:"email"`
+}
 
 // 数据库User表
 type User struct {
